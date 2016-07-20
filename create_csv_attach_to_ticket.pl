@@ -10,7 +10,6 @@
 #######################################create_csv_attach_to_ticket.pl########################################
 
 
-
 use strict;
 #use warnings;
 use File::Basename;
@@ -19,13 +18,11 @@ use Text::CSV_XS;
 use Data::Dumper;
 use File::Temp qw/ tempfile tempdir /;
 
-
 my $usage = "Usage: $0 --ticket 123 --filename \"awesome_file\" --username \"ipautomata\" --password \"asdfa345ra\"--string \"String in CSV format\"\n";
 if (!@ARGV) {
     print $usage;
     exit 1;
 }
-
 
 my %opts = (
   'ticket' => undef,
@@ -58,3 +55,5 @@ close($fh);
 
 #attach created csv file to ticket via API
 system "curl -X POST -u $opts{'username'}:$opts{'password'} -H \"Content-Type: multipart/form-data\" -F \"filedata=\@$filename\" https://api-ipcenter.ipsoft.com/IPradar/v2/ticket/$opts{'ticket'}/attach/";
+
+
